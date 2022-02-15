@@ -100,4 +100,40 @@ public class Board implements IBoard {
 
 		return true;
 	}
+
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean putShip(AbstractShip ship, Coords coords) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasShip(Coords coords) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setHit(boolean hit, Coords coords) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Boolean getHit(Coords coords) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Hit sendHit(Coords res) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
