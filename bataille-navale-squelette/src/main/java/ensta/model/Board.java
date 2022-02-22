@@ -1,7 +1,9 @@
 package ensta.model;
 
 import ensta.model.ship.AbstractShip;
+import ensta.util.ColorUtil;
 import ensta.util.Orientation;
+import ensta.model.ship.ShipState;
 
 public class Board implements IBoard {
 
@@ -9,8 +11,8 @@ public class Board implements IBoard {
 	private String name;
 	private int size = DEFAULT_SIZE;
 	
-	private char[] tabNavire = new char[size*size];
-	private boolean[] tabFrappes=new boolean[size*size];
+	private ShipState[] tabNavire = new ShipState[size*size];
+	private Boolean[] tabFrappes = new Boolean[size*size];
 	
 	public Board() {
 	}
@@ -18,18 +20,10 @@ public class Board implements IBoard {
 	public Board(String _name, int _size) {
 		this.name = _name;
 		this.size = _size;
-		for(int i=0;i<this.size*this.size;i++) {
-			tabNavire[i] = '.';
-			tabFrappes[i] = false;
-		}
 	}
 	
 	public Board(String _name) {
 		this.name = _name;
-		for(int i=0;i<this.size;i++) {
-			tabNavire[i] = '.';
-			tabFrappes[i] = false;
-		}
 	}
 
 	public void print() {
@@ -46,7 +40,11 @@ public class Board implements IBoard {
 				System.out.print(c+"\t");
 				c++;
 			}
-			System.out.print(tabNavire[i-1]+"\t");
+			if (tabNavire[i-1] != null) {
+				System.out.print(tabNavire[i-1]+"\t");
+			}else {
+				System.out.print(".\t");
+			}
 			
 		}
 		
@@ -60,7 +58,11 @@ public class Board implements IBoard {
 		for (int i=1; i<this.size+1;i++) {
 			System.out.print(i+"\t");
 			for (int j=0; j<this.size;j++) {
-				System.out.print(tabFrappes[i-1]+"\t");
+				if (tabFrappes[i-1] != null) {
+					System.out.print(ColorUtil.colorize("X", (tabFrappes[i-1] ? ColorUtil.Color.RED : ColorUtil.Color.WHITE))+"\t");
+				}else {
+					System.out.print(".\t");
+				}
 			}
 			System.out.print("\n");
 		}
@@ -117,7 +119,7 @@ public class Board implements IBoard {
 
 	@Override
 	public boolean putShip(AbstractShip ship, Coords coords) {
-		char L = ship.getLabel();
+		//char L = ship.getLabel();
 		Orientation o = ship.getOrientation();
 		int dx = 0, dy = 0;
 		if (!canPutShip(ship, coords)) {
@@ -138,7 +140,8 @@ public class Board implements IBoard {
 		int y = coords.getY();
 		
 		for (int i = 0; i < ship.getLength(); ++i) {
-			tabNavire[x+y*size] = L;
+			tabNavire[x+y*size]=new ShipState(ship);
+			//tabNavire[x+y*size] = L;
 			x+= dx;
 			y+= dy;
 		}
@@ -150,7 +153,7 @@ public class Board implements IBoard {
 	public boolean hasShip(Coords coords) {
 		int x = coords.getX();
 		int y = coords.getY();
-		return tabNavire[x+y*size] != '.';
+		return tabNavire[x+y*size] != null;
 	}
 
 	@Override
