@@ -13,7 +13,7 @@ public class Main {
 		Board b = new Board("board1",10);
 		//b.print();
 		BattleShip B1 = new BattleShip(Orientation.WEST);
-		Coords c = new Coords('D',3);
+		Coords c = new Coords('J',10);
 		b.putShip(B1,c);
 		b.print();
     }

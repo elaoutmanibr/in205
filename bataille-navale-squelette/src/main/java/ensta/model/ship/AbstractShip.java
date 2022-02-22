@@ -27,7 +27,7 @@ public abstract class AbstractShip {
 	public int getLength() {
 		return length;
 	}
-	public String getNom() {
+	public String getName() {
 		return nom;
 	}
 	public char getLabel() {

@@ -24,4 +24,12 @@ public enum Orientation {
 	public static Orientation randomOrientation() {
 		return VALUES.get(RANDOM.nextInt(SIZE));
 	}
+	
+	public static Orientation str2orient(String o) {
+		if(o=="n") {return Orientation.NORTH;}
+		else if (o=="w") {return Orientation.WEST;}
+		else if (o=="e") {return Orientation.EAST;}
+		else if(o=="s") {return Orientation.SOUTH;}
+		return null;
+	}
 }

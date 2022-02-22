@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import ensta.model.ship.AbstractShip;
+import ensta.model.ship.Destroyer;
+import ensta.model.ship.Submarine;
 import ensta.util.Orientation;
 import ensta.view.InputHelper;
 
@@ -44,8 +46,15 @@ public class Player {
 			System.out.println(msg);
 			InputHelper.ShipInput res = InputHelper.readShipInput();
 			// TODO set ship orientation
+			ship.setOrientation(Orientation.str2orient(res.orientation));
 			// TODO put ship at given position
+			Coords c = new Coords(res.x+65, res.y+1);
+			
 			// TODO when ship placement successful
+			if (board.canPutShip(ship,c)) {
+				board.putShip(ship,c);
+				System.out.println(ship.getName()+" is succefully placed.");
+			}
 			++i;
 			done = i == 5;
 
