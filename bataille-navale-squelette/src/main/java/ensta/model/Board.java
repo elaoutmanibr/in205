@@ -18,7 +18,7 @@ public class Board implements IBoard {
 	public Board(String _name, int _size) {
 		this.name = _name;
 		this.size = _size;
-		for(int i=0;i<this.size;i++) {
+		for(int i=0;i<this.size*this.size;i++) {
 			tabNavire[i] = '.';
 			tabFrappes[i] = false;
 		}
@@ -33,18 +33,21 @@ public class Board implements IBoard {
 	}
 
 	public void print() {
+		int c=1;
 		System.out.println("Navires:");
 		System.out.print(" \t");
 		for (int i=0; i<this.size;i++) {
 			System.out.print((char)(65+i)+"\t");
 		}
 		System.out.print("\n");
-		for (int i=1; i<this.size+1;i++) {
-			System.out.print(i+"\t");
-			for (int j=0; j<this.size;j++) {
-				System.out.print(tabNavire[i-1]+"\t");
+		for (int i=1; i<this.size*this.size+1;i++) {
+			if (i % this.size == 1) {
+				System.out.print("\n");
+				System.out.print(c+"\t");
+				c++;
 			}
-			System.out.print("\n");
+			System.out.print(tabNavire[i-1]+"\t");
+			
 		}
 		
 		System.out.print("\n");
@@ -67,6 +70,10 @@ public class Board implements IBoard {
 		Orientation o = ship.getOrientation();
 		int dx = 0, dy = 0;
 		if (o == Orientation.EAST) {
+//			System.out.println(coords.getX());
+//			System.out.println(coords.getY());
+//			System.out.println(ship.getLength());
+//			System.out.println(this.size);
 			if (coords.getX() + ship.getLength() >= this.size) {
 				return false;
 			}
@@ -94,6 +101,7 @@ public class Board implements IBoard {
 			if (this.hasShip(iCoords)) {
 				return false;
 			}
+			
 			iCoords.setX(iCoords.getX() + dx);
 			iCoords.setY(iCoords.getY() + dy);
 		}
@@ -103,37 +111,68 @@ public class Board implements IBoard {
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return size;
 	}
 
 	@Override
 	public boolean putShip(AbstractShip ship, Coords coords) {
-		// TODO Auto-generated method stub
-		return false;
+		char L = ship.getLabel();
+		Orientation o = ship.getOrientation();
+		int dx = 0, dy = 0;
+		if (!canPutShip(ship, coords)) {
+			System.out.println("Cannot put ship");
+			return false;
+		}
+		if (o == Orientation.EAST) {
+			dx = 1;
+		} else if (o == Orientation.SOUTH) {
+			dy = 1;
+		} else if (o == Orientation.NORTH) {
+			dy = -1;
+		} else if (o == Orientation.WEST) {
+			dx = -1;
+		}
+		
+		int x = coords.getX();
+		int y = coords.getY();
+		
+		for (int i = 0; i < ship.getLength(); ++i) {
+			tabNavire[x+y*size] = L;
+			x+= dx;
+			y+= dy;
+		}
+		
+		return true;
 	}
 
 	@Override
 	public boolean hasShip(Coords coords) {
-		// TODO Auto-generated method stub
-		return false;
+		int x = coords.getX();
+		int y = coords.getY();
+		return tabNavire[x+y*size] != '.';
 	}
 
 	@Override
 	public void setHit(boolean hit, Coords coords) {
-		// TODO Auto-generated method stub
-		
+		int x = coords.getX() ;
+		int y = coords.getY() ;
+		tabFrappes[x+y*size] = hit;
 	}
 
 	@Override
 	public Boolean getHit(Coords coords) {
-		// TODO Auto-generated method stub
-		return null;
+		int x = coords.getX();
+		int y = coords.getY();
+		return tabFrappes[x+y*size];
 	}
 
 	@Override
 	public Hit sendHit(Coords res) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

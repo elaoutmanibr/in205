@@ -14,11 +14,16 @@ public class Coords {
 	}
 
 	public int getY() {
-		return y;
+		return y-1;
 	}
 	public int getX() {
-		return x;
+		return x-65; //A=65
 	}
+	
+	
+	public void setX(int i) {x = i+65;}
+
+	public void setY(int i) {y=i+1;}
 	
 	private int x;
 	private int y;

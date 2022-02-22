@@ -6,11 +6,11 @@ public abstract class AbstractShip {
 	private Orientation orientation;
 	private int length;
 	private String nom;
-	private String label;
+	private char label;
 	
 	
 	public AbstractShip() {}
-	public AbstractShip(String _label, String _nom, int _length, Orientation o) {
+	public AbstractShip(char _label, String _nom, int _length, Orientation o) {
 		orientation = o;
 		length = _length;
 		nom = _nom;
@@ -30,10 +30,10 @@ public abstract class AbstractShip {
 	public String getNom() {
 		return nom;
 	}
-	public String getLabel() {
+	public char getLabel() {
 		return label;
 	}
-	public void setLabel(String label) {
+	public void setLabel(char label) {
 		this.label = label;
 	}
 	
