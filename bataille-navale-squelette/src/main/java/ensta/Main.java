@@ -15,6 +15,14 @@ public class Main {
 		BattleShip B1 = new BattleShip(Orientation.WEST);
 		Coords c = new Coords('J',10);
 		b.putShip(B1,c);
+		b.sendHit(c);
+		Coords c1 = new Coords('G',10);
+		Coords c2 = new Coords('H',10);
+		Coords c3 = new Coords('I',10);
+		b.sendHit(c1);
+		b.sendHit(c2);
+		String h = b.sendHit(c3).toString();
+		System.out.println(h);
 		b.print();
     }
 

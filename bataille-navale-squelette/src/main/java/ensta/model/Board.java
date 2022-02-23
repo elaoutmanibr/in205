@@ -41,7 +41,7 @@ public class Board implements IBoard {
 				c++;
 			}
 			if (tabNavire[i-1] != null) {
-				System.out.print(tabNavire[i-1]+"\t");
+				System.out.print(tabNavire[i-1].getShip().getLabel()+"\t");
 			}else {
 				System.out.print(".\t");
 			}
@@ -50,22 +50,36 @@ public class Board implements IBoard {
 		
 		System.out.print("\n");
 		System.out.println("Frappes:");
+		c=1;
 		System.out.print(" \t");
 		for (int i=0; i<this.size;i++) {
 			System.out.print((char)(65+i)+"\t");
 		}
 		System.out.print("\n");
-		for (int i=1; i<this.size+1;i++) {
-			System.out.print(i+"\t");
-			for (int j=0; j<this.size;j++) {
-				if (tabFrappes[i-1] != null) {
-					System.out.print(ColorUtil.colorize("X", (tabFrappes[i-1] ? ColorUtil.Color.RED : ColorUtil.Color.WHITE))+"\t");
-				}else {
-					System.out.print(".\t");
-				}
+		for (int i=1; i<this.size*this.size+1;i++) {
+			if (i % this.size == 1) {
+				System.out.print("\n");
+				System.out.print(c+"\t");
+				c++;
 			}
-			System.out.print("\n");
+			if (tabFrappes[i-1] != null) {
+				System.out.print(ColorUtil.colorize("X\t", (tabFrappes[i-1].booleanValue() ? ColorUtil.Color.RED : ColorUtil.Color.WHITE)));
+			}else {
+				System.out.print(".\t");
+			}
 		}
+		//////////////////////////
+//		for (int i=1; i<this.size+1;i++) {
+//			System.out.print(i+"\t");
+//			for (int j=0; j<this.size;j++) {
+//				if (tabFrappes[i-1] != null) {
+//					System.out.print(ColorUtil.colorize("X", (tabFrappes[i-1] ? ColorUtil.Color.RED : ColorUtil.Color.WHITE))+"\t");
+//				}else {
+//					System.out.print(".\t");
+//				}
+//			}
+//			System.out.print("\n");
+//		}
 	}
 
 	public boolean canPutShip(AbstractShip ship, Coords coords) {
@@ -161,6 +175,8 @@ public class Board implements IBoard {
 		int x = coords.getX() ;
 		int y = coords.getY() ;
 		tabFrappes[x+y*size] = hit;
+		//System.out.println(tabFrappes[x+y*size]);
+		
 	}
 
 	@Override
@@ -172,7 +188,19 @@ public class Board implements IBoard {
 
 	@Override
 	public Hit sendHit(Coords res) {
-		return null;
+		if(!hasShip(res)) {
+			setHit(false,res);
+			return Hit.MISS;
+		}
+		int x = res.getX();
+		int y = res.getY();
+		tabNavire[x+y*size].addStrike();
+		setHit(true,res);
+		if(tabNavire[x+y*size].isSunk()) {
+			
+			return Hit.fromInt(tabNavire[x+y*size].getShip().getLength());
+		}
+		return Hit.STRIKE;
 	}
 
 	public String getName() {
