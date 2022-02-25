@@ -26,10 +26,11 @@ public enum Orientation {
 	}
 	
 	public static Orientation str2orient(String o) {
-		if(o=="n") {return Orientation.NORTH;}
-		else if (o=="w") {return Orientation.WEST;}
-		else if (o=="e") {return Orientation.EAST;}
-		else if(o=="s") {return Orientation.SOUTH;}
+		if(o.equals("north")) {return Orientation.NORTH;}
+		else if (o.equals("west")) {return Orientation.WEST;}
+		else if (o.equals("east")) {return Orientation.EAST;}
+		else if(o.equals("south")) {return Orientation.SOUTH;}
+		else {System.out.println("orientation non reconnue");}
 		return null;
 	}
 }

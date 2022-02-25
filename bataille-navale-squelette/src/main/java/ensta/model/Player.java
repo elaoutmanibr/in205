@@ -48,18 +48,22 @@ public class Player {
 			// TODO set ship orientation
 			ship.setOrientation(Orientation.str2orient(res.orientation));
 			// TODO put ship at given position
-			Coords c = new Coords(res.x+65, res.y+1);
+			Coords c = new Coords(res.x+65, res.y);
 			
 			// TODO when ship placement successful
 			if (board.canPutShip(ship,c)) {
 				board.putShip(ship,c);
 				System.out.println(ship.getName()+" is succefully placed.");
+				++i;
+			}else {
+				System.out.println("Unsuccessful ship placement. Retry !");
 			}
-			++i;
+			
 			done = i == 5;
 
-			board.print();
+			//board.print();
 		} while (!done);
+		board.print();
 	}
 
 	public Hit sendHit() {
@@ -69,7 +73,7 @@ public class Player {
 		do {
 			System.out.println("où frapper?");
 			InputHelper.CoordInput hitInput = InputHelper.readCoordInput();
-			Coords coords = new Coords(hitInput.x +65, hitInput.y+1);
+			Coords coords = new Coords(hitInput.x +65, hitInput.y);
 			// TODO call sendHit on this.opponentBoard
 			if(opponentBoard.getHit(coords) == null) {
                 hit = opponentBoard.sendHit(coords);

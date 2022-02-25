@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import ensta.ai.PlayerAI;
 import ensta.model.Board;
 import ensta.model.Coords;
 import ensta.model.Hit;
@@ -42,10 +43,18 @@ public class Game {
 
 
 			// TODO init boards
+			Board b1 = new Board("player", 10);
+			Board b2 = new Board("CPU", 10);
+			List<AbstractShip> ships = createDefaultShips();
 
 			// TODO init this.player1 & this.player2
+			this.player1 = new Player(b1, b2, ships);
+			this.player2 = new PlayerAI(b2, b1, ships);
 
 			// TODO place player ships
+			b1.print();
+			player1.putShips();
+			player2.putShips();
 		}
 		return this;
 	}
@@ -59,13 +68,16 @@ public class Game {
 		Hit hit;
 
 		// main loop
+		
 		b1.print();
 		boolean done;
 		do {
 			hit = Hit.MISS; // TODO player1 send a hit
+			player1.sendHit();
 			boolean strike = hit != Hit.MISS; // TODO set this hit on his board (b1)
-
 			done = updateScore();
+//		    System.out.print("\033[H\033[2J"); 
+//		    System.out.flush(); 
 			b1.print();
 			System.out.println(makeHitMessage(false /* outgoing hit */, coords, hit));
 
@@ -74,7 +86,7 @@ public class Game {
 			if (!done && !strike) {
 				do {
 					hit = Hit.MISS; // TODO player2 send a hit.
-
+					player2.sendHit();
 					strike = hit != Hit.MISS;
 					if (strike) {
 						b1.print();
@@ -155,8 +167,7 @@ public class Game {
 			msg = hit.toString() + " coulé";
 			color = ColorUtil.Color.RED;
 		}
-		msg = String.format("%s Frappe en %c%d : %s", incoming ? "<=" : "=>", ((char) ('A' + coords.getX())),
-				(coords.getY() + 1), msg);
+		msg = String.format("%s Frappe en %c %d : %s", incoming ? "<=" : "=>", ((char) ('A' + coords.getX())),(coords.getY() + 1), msg);
 		return ColorUtil.colorize(msg, color);
 	}
 

@@ -80,6 +80,7 @@ public class Board implements IBoard {
 //			}
 //			System.out.print("\n");
 //		}
+		System.out.print("\n");
 	}
 
 	public boolean canPutShip(AbstractShip ship, Coords coords) {
@@ -154,7 +155,10 @@ public class Board implements IBoard {
 		int y = coords.getY();
 		
 		for (int i = 0; i < ship.getLength(); ++i) {
+			
 			tabNavire[x+y*size]=new ShipState(ship);
+//			System.out.println(x);
+//			System.out.println(y);
 			//tabNavire[x+y*size] = L;
 			x+= dx;
 			y+= dy;
