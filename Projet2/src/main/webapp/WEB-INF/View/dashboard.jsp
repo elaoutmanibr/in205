@@ -23,7 +23,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>${livreCount}</h3>
+              <h3>${bookCount}</h3>
               <p>Membres</p>
             </div>
             <div class="icon">
@@ -35,7 +35,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>27</h3> <!-- TODO : afficher le nombre de livres à la place de 27 -->
+              <h3>${memberCount}</h3> <!-- TODO : afficher le nombre de livres à la place de 27 -->
               <p>Livres</p>
             </div>
             <div class="icon">
@@ -47,7 +47,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>1515</h3> <!-- TODO : afficher le nombre d'emprunts à la place de 1515 -->
+              <h3>${borrowCount}</h3> <!-- TODO : afficher le nombre d'emprunts à la place de 1515 -->
               <p>Emprunts</p>
             </div>
             <div class="icon">
@@ -56,34 +56,7 @@
             <a href="emprunt_list" class="small-box-footer" class="animsition-link">Liste des emprunts <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="container">
-	        <div class="col s12">
-	          <h5>Emprunts en cours</h5>
-	          <table class="striped">
-                <thead>
-                    <tr>
-                        <th>Livre</th>
-                        <th>Membre emprunteur</th>
-                        <th>Date d'emprunt</th>
-                        <th>Retour</th>
-                    </tr>
-                </thead>
-                <tbody id="results">
-                
-                    <tr>
-                        <td>Titre du livre, <em>de Nom de l'auteur</em></td>
-                        <td>Prénom et nom du membre emprunteur</td>
-                        <td>Date de l'emprunt</td>
-                        <td>
-                            <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
-                        </td>
-                    </tr>
-                    
-                     <!-- TODO : parcourir la liste des emprunts en cours et les afficher selon la structure d'exemple ci-dessus -->
-                </tbody>
-            </table>
-          </div>
-        </div>
+
       </div>
     </section>
   </main>

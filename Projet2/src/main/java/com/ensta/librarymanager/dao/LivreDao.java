@@ -121,7 +121,7 @@ public class LivreDao implements ILivreDao {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement prepStat = conn.prepareStatement("SELECT COUNT(id) AS count FROM livre;");
 			ResultSet rs = prepStat.executeQuery();
-			
+			rs.next();
 			return rs.getInt("count");
 		} catch (Exception e) {
 			e.printStackTrace();

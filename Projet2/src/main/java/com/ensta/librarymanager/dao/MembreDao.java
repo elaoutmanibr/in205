@@ -133,7 +133,7 @@ public class MembreDao implements IMembreDao {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement prepStat = conn.prepareStatement("SELECT COUNT(id) AS count FROM membre;");
 			ResultSet rs = prepStat.executeQuery();
-			
+			rs.next();
 			return rs.getInt("count");
 		} catch (Exception e) {
 			e.printStackTrace();

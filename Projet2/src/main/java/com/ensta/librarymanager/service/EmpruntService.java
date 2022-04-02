@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.ensta.librarymanager.dao.EmpruntDao;
+import com.ensta.librarymanager.dao.MembreDao;
 import com.ensta.librarymanager.exception.ServiceException;
 import com.ensta.librarymanager.modele.Abonnement;
 import com.ensta.librarymanager.modele.Emprunt;
@@ -72,9 +73,15 @@ public class EmpruntService implements IEmpruntService {
 	}
 
 	@Override
-	public void create(int idMembre, int idLivre, LocalDate dateEmprunt) throws ServiceException {
+	public boolean create(int idMembre, int idLivre, LocalDate dateEmprunt) throws ServiceException {
 		try {
-			this.empruntDao.create(idMembre,idLivre,dateEmprunt);
+			MembreDao membre = new MembreDao();
+			Membre m = membre.getById(idMembre);
+			if (isEmpruntPossible(m) && isLivreDispo(idLivre)) {
+				this.empruntDao.create(idMembre,idLivre,dateEmprunt);
+				return true;
+			}
+			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServiceException();

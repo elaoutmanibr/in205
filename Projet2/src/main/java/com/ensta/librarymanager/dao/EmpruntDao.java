@@ -31,16 +31,7 @@ public class EmpruntDao implements IEmpruntDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int idMembre = rs.getInt("idMembre");
-	//			String nom = rs.getString("nom");
-	//			String prenom = rs.getString("prenom");
-	//			String adresse = rs.getString("adresse");
-	//			String email = rs.getString("email");
-	//			String telephone = rs.getString("telephone");
-	//			Abonnement abonnement = Abonnement.fromString(rs.getString("abonnement"));
-				int idLivre = rs.getInt("idLivre");
-	//			String titre = rs.getString("titre");
-	//			String auteur = rs.getString("auteur");
-	//			String isbn = rs.getString("isbn");
+				int idLivre = rs.getInt("idLivre");;
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				LocalDate dateRetour = rs.getDate("dateRetour")== null ? null : rs.getDate("dateRetour").toLocalDate();
 				Emprunt emprunt = new Emprunt(id, idMembre, idLivre,dateEmprunt,dateRetour);
@@ -70,16 +61,7 @@ public class EmpruntDao implements IEmpruntDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int idMembre = rs.getInt("idMembre");
-	//			String nom = rs.getString("nom");
-	//			String prenom = rs.getString("prenom");
-	//			String adresse = rs.getString("adresse");
-	//			String email = rs.getString("email");
-	//			String telephone = rs.getString("telephone");
-	//			Abonnement abonnement = Abonnement.fromString(rs.getString("abonnement"));
 				int idLivre = rs.getInt("idLivre");
-	//			String titre = rs.getString("titre");
-	//			String auteur = rs.getString("auteur");
-	//			String isbn = rs.getString("isbn");
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				LocalDate dateRetour = rs.getDate("dateRetour")== null ? null : rs.getDate("dateRetour").toLocalDate();
 				Emprunt emprunt = new Emprunt(id, idMembre, idLivre,dateEmprunt,dateRetour);
@@ -109,16 +91,7 @@ public class EmpruntDao implements IEmpruntDao {
 			List<Emprunt> L = new ArrayList<>();
 			while(rs.next()) {
 				int id = rs.getInt("id");
-	//			String nom = rs.getString("nom");
-	//			String prenom = rs.getString("prenom");
-	//			String adresse = rs.getString("adresse");
-	//			String email = rs.getString("email");
-	//			String telephone = rs.getString("telephone");
-	//			Abonnement abonnement = Abonnement.fromString(rs.getString("abonnement"));
 				int idLivre = rs.getInt("idLivre");
-	//			String titre = rs.getString("titre");
-	//			String auteur = rs.getString("auteur");
-	//			String isbn = rs.getString("isbn");
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				LocalDate dateRetour = rs.getDate("dateRetour")== null ? null : rs.getDate("dateRetour").toLocalDate();
 				Emprunt emprunt = new Emprunt(id, idMembre, idLivre,dateEmprunt,dateRetour);
@@ -149,15 +122,6 @@ public class EmpruntDao implements IEmpruntDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				int idMembre = rs.getInt("idMembre");
-	//			String nom = rs.getString("nom");
-	//			String prenom = rs.getString("prenom");
-	//			String adresse = rs.getString("adresse");
-	//			String email = rs.getString("email");
-	//			String telephone = rs.getString("telephone");
-	//			Abonnement abonnement = Abonnement.fromString(rs.getString("abonnement"));
-	//			String titre = rs.getString("titre");
-	//			String auteur = rs.getString("auteur");
-	//			String isbn = rs.getString("isbn");
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				LocalDate dateRetour = rs.getDate("dateRetour")== null ? null : rs.getDate("dateRetour").toLocalDate();
 				Emprunt emprunt = new Emprunt(id, idMembre, idLivre,dateEmprunt,dateRetour);
@@ -188,15 +152,6 @@ public class EmpruntDao implements IEmpruntDao {
 			if(rs.next()) {
 				int idLivre = rs.getInt("idLivre");
 				int idMembre = rs.getInt("idMembre");
-	//			String nom = rs.getString("nom");
-	//			String prenom = rs.getString("prenom");
-	//			String adresse = rs.getString("adresse");
-	//			String email = rs.getString("email");
-	//			String telephone = rs.getString("telephone");
-	//			Abonnement abonnement = Abonnement.fromString(rs.getString("abonnement"));
-	//			String titre = rs.getString("titre");
-	//			String auteur = rs.getString("auteur");
-	//			String isbn = rs.getString("isbn");
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				LocalDate dateRetour = rs.getDate("dateRetour")== null ? null : rs.getDate("dateRetour").toLocalDate();
 				emprunt = new Emprunt(id, idMembre, idLivre,dateEmprunt,dateRetour);

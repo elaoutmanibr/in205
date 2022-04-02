@@ -47,10 +47,15 @@ public class EmpruntAddServlet extends HttpServlet{
 			int idLivre = Integer.parseInt(request.getParameter("idLivre"));
 			LocalDate dateEmprunt = LocalDate.now();
 			
-			emprunt.create(idMembre, idLivre, dateEmprunt);
+			boolean b = emprunt.create(idMembre, idLivre, dateEmprunt);
+			if (!b) {
+				response.sendRedirect(request.getContextPath()+"/emprunt_error");
+			}else {
+				response.sendRedirect(request.getContextPath()+"/emprunt_add");
+			}
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath()+"/emprunt_add");
+		
 	}
 }

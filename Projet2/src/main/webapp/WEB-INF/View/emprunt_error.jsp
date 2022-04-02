@@ -17,35 +17,15 @@
     <section class="content">
       <div class="page-announce valign-wrapper">
         <a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only"><i class="material-icons">menu</i></a>
-        <h1 class="page-announce-text valign">Liste des livres</h1>
+        <h1 class="page-announce-text valign">Erreur</h1>
       </div>
       <div class="row">
-	        <div class="col s12">
-	          <table class="striped no-padding">
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Code ISBN 13</th>
-                        <th>Détails</th>
-                    </tr>
-                </thead>
-                <tbody>
-                	<c:if test="${!bookList.isEmpty()}">
-                		<c:forEach items="${bookList}" var="book">
-                			<tr>
-		                        <td>${book.titre}</td>
-		                        <td>${book.auteur}</td>
-		                        <td>${book.isbn}</td>
-		                        <td class="center"><a href="livre_details?id=${book.id}">Détails<ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
-		                    </tr>
-		                 </c:forEach>
-		            </c:if>
-                
-                </tbody>
-            </table>
-          </div>
+        <div class="container">
+          <h3>Message :</h3>
+          <p>Le livre demandé n'est pas disponible ou le plafond des livres empruntés est atteint</p>
+          <a href="emprunt_add">Réessayer</a>
         </div>
+      </div>
     </section>
   </main>
   <jsp:include page='footer.jsp'></jsp:include>
